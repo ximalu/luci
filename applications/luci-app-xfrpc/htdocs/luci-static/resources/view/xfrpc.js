@@ -104,6 +104,17 @@ return view.extend({
 		o.value(2, _('Alert'))
 		o.value(1, _('Emergency'))
 
+		/*
+		 * Proxy sections grid.
+		 *
+		 * GridSection type is "xfrpc". The init script (xfrpc.init) generates the
+		 * xfrpc.ini file from all UCI sections. It first processes type-specific
+		 * sections (tcp, http, https, socks5) via config_foreach, then falls back
+		 * to handling "xfrpc"-typed sections by reading the "type" option.
+		 *
+		 * This ensures proxies added here via LuCI work correctly regardless of
+		 * whether the user's init script has the fallback fix applied.
+		 */
 		s = m.section(form.GridSection, 'xfrpc', _('Proxy Settings'));
 		s.addremove = true;
 		s.filter = function(s) { return s !== 'common'; };
