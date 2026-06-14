@@ -81,17 +81,12 @@ return view.extend({
 			sent to the server. The server must have a matching token for authorization to succeed.'), 
 			_('By default, this value is "".')));
 
-		o = s.taboption('init', form.SectionValue, 'init', form.TypedSection, 
-			'xfrp', _('Startup Settings'));
-		s = o.subsection;
-		s.anonymous = true;
-		s.dynamic = true;
-
-		o = s.option(form.Flag, 'disabled', _('Disabled xfrpc service'));
+		o = s.taboption('init', form.Flag, 'enabled', _('Enable xfrpc service'));
 		o.datatype = 'bool';
-		o.optional = true;
+		o.default = '1';
+		o.rmempty = false;
 
-		o = s.option(form.ListValue, 'loglevel', _('Log level'), 
+		o = s.taboption('init', form.ListValue, 'loglevel', _('Log level'), 
 			'%s <br /> %s'.format(_('LogLevel specifies the minimum log level. Valid values are "Debug", "Info", \
 			"Notice", "Warning", "Error", "Critical", "Alert" and "Emergency".'),
 			_('By default, this value is "Info".')));
